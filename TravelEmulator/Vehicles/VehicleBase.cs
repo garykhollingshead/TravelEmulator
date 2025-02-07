@@ -27,7 +27,6 @@ public abstract class VehicleBase
         Height = height;
         Length = length;
         SpeedInMph = speedInMph;
-        MaxTurning = maxTurning;
 
         if (randomGenerator == null)
         {

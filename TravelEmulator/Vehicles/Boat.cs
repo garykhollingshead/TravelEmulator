@@ -39,9 +39,8 @@ public class Boat : VehicleBase
         _travelZone = TravelZones[RandomGenerator.Next(0, TravelZones.Count - 1)];
     }
 
-    public Boat(string descriptor, double weight, double width, double height, double length, double maxTurning,
-        double draft, string manufacturer, PowerTypes power) : 
-        this(descriptor, weight, width, height, length, 0, maxTurning, draft, manufacturer, power)
+    public Boat(string descriptor, double weight, double width, double height, double length, double draft, string manufacturer, PowerTypes power) : 
+        this(descriptor, weight, width, height, length, 0, 30, draft, manufacturer, power)
     {
         _power = power;
         Draft = draft;
