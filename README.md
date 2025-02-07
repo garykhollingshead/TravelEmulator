@@ -31,3 +31,4 @@ Implimentation order:
   - waypoint logic
   - JNY writing logic
 - Optimizations
+- Documentation
