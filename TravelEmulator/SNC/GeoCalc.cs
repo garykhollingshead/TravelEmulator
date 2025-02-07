@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SNC
+﻿namespace TravelEmulator.SNC
 {
     public static class GeoCalc
     {

@@ -5,16 +5,16 @@ namespace TravelEmulator.Vehicles;
 
 public class Car : VehicleBase
 {
-    public string Manufacturer { get; private set; }
-    public uint ModelYear { get; private set; }
+    public string Manufacturer { get; }
+    public uint ModelYear { get; }
     private readonly BodyStyleTypes _bodyStyle;
     public string BodyStyle => _bodyStyle.ToString();
     private readonly FuelTypes _fuel;
     public string Fuel => _fuel.ToString();
 
-    public Car(string descriptor, double weight, double width, double height, double length, double speed, double maxTurning, 
+    public Car(string descriptor, double weight, double width, double height, double length, double speedInMph, double maxTurning, 
         string manufacturer, uint modelYear, BodyStyleTypes bodyStyle, FuelTypes fuel) : 
-        base("CAR", descriptor, weight, width, height, length, speed, maxTurning)
+        base("CAR", descriptor, weight, width, height, length, speedInMph, maxTurning)
     {
         _bodyStyle = bodyStyle;
         _fuel = fuel;
@@ -22,8 +22,16 @@ public class Car : VehicleBase
         ModelYear = modelYear;
     }
 
-    public override string GetDetails()
+    public Car(string descriptor, double weight, double width, double height, double length, double maxTurning,
+        string manufacturer, uint modelYear, BodyStyleTypes bodyStyle, FuelTypes fuel) : this(descriptor, weight, width,
+        height,
+        length, 0, maxTurning, manufacturer, modelYear, bodyStyle, fuel)
     {
-        return $"{base.GetDetails()},{Manufacturer},{ModelYear},{BodyStyle},{Fuel}";
+        SpeedInMph = RandomGenerator.Next(25, 60);
+    }
+
+    public override string GetDetailsForJny()
+    {
+        return $"{base.GetDetailsForJny()},{Manufacturer},{ModelYear},{BodyStyle},{Fuel}";
     }
 }

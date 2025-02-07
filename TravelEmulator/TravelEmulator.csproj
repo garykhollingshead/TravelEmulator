@@ -8,8 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="FileOperations\" />
-      <Folder Include="Geo\" />
+      <Folder Include="SNC\" />
     </ItemGroup>
 
 </Project>
