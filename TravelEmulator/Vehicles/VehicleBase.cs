@@ -12,7 +12,7 @@ public abstract class VehicleBase
     public double Width { get; }
     public double Height { get; }
     public double Length { get; }
-    public double SpeedInMph { get; protected set; }
+    public double SpeedInMph { get; protected init; }
     public double MaxTurning { get; }
 
     protected readonly Random RandomGenerator;
@@ -27,6 +27,7 @@ public abstract class VehicleBase
         Height = height;
         Length = length;
         SpeedInMph = speedInMph;
+        MaxTurning = maxTurning;
 
         if (randomGenerator == null)
         {
@@ -39,7 +40,7 @@ public abstract class VehicleBase
 
     public virtual string GetDetailsForJny()
     {
-        return $"{Identifier},{Descriptor},{Weight},{Width},{Height},{Length}";
+        return $"{Identifier},{Descriptor},{Weight:F4},{Width:F4},{Height:F4},{Length:F4}";
     }
 
     public virtual bool CanNavigate(Coordinate coordinate)

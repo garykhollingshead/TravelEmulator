@@ -19,6 +19,18 @@ public class WayPointGenerator
         _randomGenerator = randomGenerator;
     }
 
+    public IList<WayPoint> GetWayPoints(int number, VehicleBase vehicle, double maxSecondsBetweenPoints)
+    {
+        var waypoints = new List<WayPoint> {GetInitialWayPoint(vehicle)};
+
+        for (var i = 0; i < number; i++)
+        {
+            waypoints.Add(GetNextWayPoint(vehicle, waypoints[i], maxSecondsBetweenPoints));
+        }
+
+        return waypoints;
+    }
+
     public WayPoint GetInitialWayPoint(VehicleBase vehicle)
     {
         if (vehicle is Boat boat)

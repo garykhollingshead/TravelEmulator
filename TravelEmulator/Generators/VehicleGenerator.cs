@@ -6,14 +6,14 @@ namespace TravelEmulator.Generators;
 
 public class VehicleGenerator
 {
-    private Random _randomGenerator;
+    private readonly Random _randomGenerator;
     private readonly BodyStyleTypes[] _bodyTypes = Enum.GetValues<BodyStyleTypes>();
     private readonly FuelTypes[] _fuelTypes = Enum.GetValues<FuelTypes>();
     private readonly PowerTypes[] _powerTypes = Enum.GetValues<PowerTypes>();
 
-    public VehicleGenerator(Random randomGenerator)
+    public VehicleGenerator(Random randomGenerator = null)
     {
-        _randomGenerator = randomGenerator;
+        _randomGenerator = randomGenerator ?? new Random();
     }
 
     private string GenerateRandomWord()
@@ -32,6 +32,11 @@ public class VehicleGenerator
         }
 
         return wordBuilder.ToString();
+    }
+
+    public VehicleBase GenerateRandom(VehicleTypes vehicleType)
+    {
+        return vehicleType == VehicleTypes.Car ? GenerateRandomCar() : GenerateRandomBoat();
     }
     
     public Car GenerateRandomCar()

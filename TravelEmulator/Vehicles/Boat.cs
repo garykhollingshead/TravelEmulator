@@ -51,7 +51,7 @@ public class Boat : VehicleBase
 
     public override string GetDetailsForJny()
     {
-        return $"{base.GetDetailsForJny()},{Power},{Draft},{Manufacturer}";
+        return $"{base.GetDetailsForJny()},{Power},{Draft:F4},{Manufacturer}";
     }
 
     public override bool CanNavigate(Coordinate coordinate)
