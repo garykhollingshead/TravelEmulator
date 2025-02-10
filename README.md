@@ -1,11 +1,34 @@
 # TravelEmulator
+Simple DotNET 8 program
 
-Initial thoughts on the project:
+## Build Instructions:
+`dotnet build TravelEmulator.sln`
+
+## Executing Instructions
+Can be executed from the commandline
+`TravelEmulator.exe`
+
+There are several flags that can be used:
+- `TravelEmulator.exe -waypoints 5`
+  - sets the number of waypoints to be generated
+  - use values 10 to 30
+- `TravelEmulator.exe -vehicle car`
+  - sets the type of vehicle to generate
+  - use values Car or Boat
+- `TravelEmulator.exe -output file.jny`
+  - sets the filename to output 
+- `TravelEmulator.exe -maxSeconds 10`
+  - sets the maximum seconds between waypoints
+  - used with the speed of the boat to determine the distance
+- `TravelEmulator.exe -settings settings.json`
+  - specifies a JSON file to be read for settings
+
+## Initial thoughts on the project:
 - Need interface system for vehicles, probably just getDetails to get first line of JNY file and canNavigate to account for land/zones and size of vehicle.
 - Need waypoint generator that needs to account for heading and zones.
 - Need JNY file reader and generator that takes the vehicle's info as first line and waypoints as the rest
 
-Implimentation order:
+##Implimentation order:
 - Vehicles
   - data for the JNY file and how to write them, as well as 
   - navigation logic around boats

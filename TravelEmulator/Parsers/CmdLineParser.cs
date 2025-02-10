@@ -12,11 +12,6 @@ public class CmdLineParser
     
     public Settings GetSettings(string[] args)
     {
-        if (args.Length == 0)
-        {
-            return new Settings();
-        }
-        
         int? numberOfWaypoints = null;
         double? maxSecondsBetweenWaypoints = null;
         VehicleTypes? vehicleType = null;
