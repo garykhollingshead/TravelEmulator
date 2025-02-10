@@ -14,11 +14,4 @@ public class WayPoint
         DeltaTime = deltaTime;
         Heading = heading;
     }
-
-    public string GetDetailsForJny()
-    {
-        return DeltaTime == 0
-            ? $"{Latitude.ToString("F6")},{Longitude.ToString("F6")},0"
-            : $"{Latitude.ToString("F6")},{Longitude.ToString("F6")},{DeltaTime.ToString("F2")}";
-    }
 }

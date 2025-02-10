@@ -1,0 +1,6 @@
+﻿{
+  "NumberOfWaypoints" : 15,
+  "MaxSecondsBetweenWaypoints" : 15,
+  "VehicleType" : "Boat",
+  "OutputFile" : ""
+}

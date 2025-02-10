@@ -6,19 +6,6 @@ namespace TravelEmulator.Generators;
 
 public class WayPointGenerator
 {
-    private Random _randomGenerator;
-
-    public WayPointGenerator(Random randomGenerator = null)
-    {
-        if (randomGenerator == null)
-        {
-            var seed = Convert.ToInt32(DateTime.Now.Ticks % int.MaxValue);
-            randomGenerator = new Random(seed);
-        }
-
-        _randomGenerator = randomGenerator;
-    }
-
     public IList<WayPoint> GetWayPoints(int number, VehicleBase vehicle, double maxSecondsBetweenPoints)
     {
         var waypoints = new List<WayPoint> {GetInitialWayPoint(vehicle)};
@@ -38,27 +25,27 @@ public class WayPointGenerator
             return GetInitialWayPointForBoat(boat);
         }
         
-        var latitude = _randomGenerator.NextDouble() * 180.0 - 90.0;
-        var longitude = _randomGenerator.NextDouble() * 360.0 - 180.0;
-        var heading = _randomGenerator.NextDouble() * 360.0;
+        var latitude = RandomGenerator.Generator.NextDouble() * 180.0 - 90.0;
+        var longitude = RandomGenerator.Generator.NextDouble() * 360.0 - 180.0;
+        var heading = RandomGenerator.Generator.NextDouble() * 360.0;
         return new WayPoint(new Coordinate(latitude, longitude), 0, heading);
     }
     
     private WayPoint GetInitialWayPointForBoat(Boat boat)
     {
-        var lowerLeftCoord = boat.GetLowerLeftTravelZoneCoordinate();
-        var upperRightCoord = boat.GetUpperRightTravelZoneCoordinate();
+        var (lowerLeftCoord, upperRightCoord) = WaterZones.Zones[RandomGenerator.Generator.Next(0, WaterZones.Zones.Count - 1)];
+        
         var latitudeRange = Math.Abs(upperRightCoord.Latitude - lowerLeftCoord.Latitude);
         var longitudeRange = Math.Abs(upperRightCoord.Longitude - lowerLeftCoord.Longitude);
-        var latitude = _randomGenerator.NextDouble() * latitudeRange + lowerLeftCoord.Latitude;
-        var longitude = _randomGenerator.NextDouble() * longitudeRange + lowerLeftCoord.Longitude;
-        var heading = _randomGenerator.NextDouble() * 360.0;
+        var latitude = RandomGenerator.Generator.NextDouble() * latitudeRange + lowerLeftCoord.Latitude;
+        var longitude = RandomGenerator.Generator.NextDouble() * longitudeRange + lowerLeftCoord.Longitude;
+        var heading = RandomGenerator.Generator.NextDouble() * 360.0;
         return new WayPoint(new Coordinate(latitude, longitude), 0, heading);
     }
 
     public WayPoint GetNextWayPoint(VehicleBase vehicle, WayPoint prevWayPoint, double maxSeconds = double.MaxValue)
     {
-        var secondsOfTravel = _randomGenerator.NextDouble() * maxSeconds;
+        var secondsOfTravel = RandomGenerator.Generator.NextDouble() * maxSeconds;
 
         Coordinate newCoords;
         double newHeading;

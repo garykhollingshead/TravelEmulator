@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using TravelEmulator.Data;
+using TravelEmulator.Generators;
 using TravelEmulator.SNC;
 
 namespace TravelEmulator.Vehicles;
@@ -15,10 +16,8 @@ public abstract class VehicleBase
     public double SpeedInMph { get; protected init; }
     public double MaxTurning { get; }
 
-    protected readonly Random RandomGenerator;
-
     public VehicleBase(string identifier, string descriptor, double weight, double width, double height, double length, double speedInMph, 
-        double maxTurning, Random randomGenerator = null)
+        double maxTurning)
     {
         Identifier = identifier;
         Descriptor = descriptor;
@@ -28,33 +27,11 @@ public abstract class VehicleBase
         Length = length;
         SpeedInMph = speedInMph;
         MaxTurning = maxTurning;
-
-        if (randomGenerator == null)
-        {
-            var seed = Convert.ToInt32(DateTime.Now.Ticks % int.MaxValue);
-            randomGenerator = new Random(seed);
-        }
-
-        RandomGenerator = randomGenerator;
-    }
-
-    public virtual string GetDetailsForJny()
-    {
-        return $"{Identifier},{Descriptor},{Weight:F4},{Width:F4},{Height:F4},{Length:F4}";
     }
 
     public virtual bool CanNavigate(Coordinate coordinate)
     {
         return true;
-    }
-
-    public double GetTravelTime(Coordinate start, Coordinate end)
-    {
-        GeoCalc.GetGreatCircleDistance(start.Latitude, start.Longitude, end.Latitude, end.Longitude, out var distanceInFeet);
-
-        var speedInFph = SpeedInMph * 1.467;
-        var travelTimeInHours = distanceInFeet / speedInFph;
-        return travelTimeInHours * 60 * 60;
     }
 
     public double GetTravelDistanceInFeetFromSecondsTraveled(double secondsTraveled)
@@ -66,7 +43,7 @@ public abstract class VehicleBase
 
     public double GetNextHeading(double heading)
     {
-        var turn = RandomGenerator.NextDouble() * (2 * MaxTurning) - MaxTurning;
+        var turn = RandomGenerator.Generator.NextDouble() * (2 * MaxTurning) - MaxTurning;
         return GetTurnHeading(heading, turn);
     }
 

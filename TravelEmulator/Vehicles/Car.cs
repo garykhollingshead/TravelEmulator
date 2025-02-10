@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using TravelEmulator.Data;
+using TravelEmulator.Generators;
 
 namespace TravelEmulator.Vehicles;
 
@@ -29,11 +30,6 @@ public class Car : VehicleBase
         uint modelYear, BodyStyleTypes bodyStyle, FuelTypes fuel) : this(descriptor, weight, width,
         height, length, 0, manufacturer, modelYear, bodyStyle, fuel)
     {
-        SpeedInMph = RandomGenerator.Next(25, 60);
-    }
-
-    public override string GetDetailsForJny()
-    {
-        return $"{base.GetDetailsForJny()},{Manufacturer},{ModelYear},{BodyStyle},{Fuel}";
+        SpeedInMph = RandomGenerator.Generator.Next(25, 60);
     }
 }

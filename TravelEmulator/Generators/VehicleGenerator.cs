@@ -6,19 +6,13 @@ namespace TravelEmulator.Generators;
 
 public class VehicleGenerator
 {
-    private readonly Random _randomGenerator;
     private readonly BodyStyleTypes[] _bodyTypes = Enum.GetValues<BodyStyleTypes>();
     private readonly FuelTypes[] _fuelTypes = Enum.GetValues<FuelTypes>();
     private readonly PowerTypes[] _powerTypes = Enum.GetValues<PowerTypes>();
 
-    public VehicleGenerator(Random randomGenerator = null)
-    {
-        _randomGenerator = randomGenerator ?? new Random();
-    }
-
     private string GenerateRandomWord()
     {
-        return GenerateRandomWord(_randomGenerator.Next(2, 13));
+        return GenerateRandomWord(RandomGenerator.Generator.Next(2, 13));
     }
 
     private string GenerateRandomWord(int length)
@@ -27,7 +21,7 @@ public class VehicleGenerator
 
         for (var i = 0; i < length; i++)
         {
-            var nextCharacter = (char) _randomGenerator.Next('a', 'z' + 1);
+            var nextCharacter = (char) RandomGenerator.Generator.Next('a', 'z' + 1);
             wordBuilder.Append(nextCharacter);
         }
 
@@ -44,15 +38,15 @@ public class VehicleGenerator
         var descriptor = GenerateRandomWord();
         var manufacturer = GenerateRandomWord();
         
-        var weight = _randomGenerator.NextDouble() * 5000 + 1000;
-        var width = _randomGenerator.NextDouble() * 5 + 5;
-        var height = _randomGenerator.NextDouble() * 5 + 5;
-        var length = _randomGenerator.NextDouble() * 5 + 5;
+        var weight = RandomGenerator.Generator.NextDouble() * 5000 + 1000;
+        var width = RandomGenerator.Generator.NextDouble() * 5 + 5;
+        var height = RandomGenerator.Generator.NextDouble() * 5 + 5;
+        var length = RandomGenerator.Generator.NextDouble() * 5 + 5;
         
-        var modelYear = (uint)_randomGenerator.Next(1920, DateTime.Now.Year);
+        var modelYear = (uint)RandomGenerator.Generator.Next(1920, DateTime.Now.Year);
 
-        var bodyStyle = _bodyTypes[_randomGenerator.Next(_bodyTypes.Length)];
-        var fuel = _fuelTypes[_randomGenerator.Next(_fuelTypes.Length)];
+        var bodyStyle = _bodyTypes[RandomGenerator.Generator.Next(_bodyTypes.Length)];
+        var fuel = _fuelTypes[RandomGenerator.Generator.Next(_fuelTypes.Length)];
 
         return new Car(descriptor, weight, width, height, length, manufacturer, modelYear,
             bodyStyle, fuel);
@@ -63,13 +57,13 @@ public class VehicleGenerator
         var descriptor = GenerateRandomWord();
         var manufacturer = GenerateRandomWord();
         
-        var weight = _randomGenerator.NextDouble() * 5000 + 1000;
-        var width = _randomGenerator.NextDouble() * 5000 + 1000;
-        var height = _randomGenerator.NextDouble() * 5000 + 1000;
-        var length = _randomGenerator.NextDouble() * 5000 + 1000;
-        var draft = _randomGenerator.NextDouble() * 5000 + 1000;
+        var weight = RandomGenerator.Generator.NextDouble() * 5000 + 1000;
+        var width = RandomGenerator.Generator.NextDouble() * 5000 + 1000;
+        var height = RandomGenerator.Generator.NextDouble() * 5000 + 1000;
+        var length = RandomGenerator.Generator.NextDouble() * 5000 + 1000;
+        var draft = RandomGenerator.Generator.NextDouble() * 5000 + 1000;
         
-        var power = _powerTypes[_randomGenerator.Next(_powerTypes.Length)];
+        var power = _powerTypes[RandomGenerator.Generator.Next(_powerTypes.Length)];
 
         return new Boat(descriptor, weight, width, height, length, draft, manufacturer, power);
     }
