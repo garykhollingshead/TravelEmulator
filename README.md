@@ -2,11 +2,17 @@
 Simple DotNET 8 program
 
 ## Build Instructions:
+The solution file can be loaded and run, or you can use the dotnet command to build the executables
 `dotnet build TravelEmulator.sln`
+You can also publish and create a single executable
+`dotnet publish -r win-x64`
 
 ## Executing Instructions
 Can be executed from the commandline
 `TravelEmulator.exe`
+
+A current build is located here:
+./CurrentReleaseBuild/TravelEmulator.exe
 
 There are several flags that can be used:
 - `TravelEmulator.exe -waypoints 5`
